@@ -5,9 +5,15 @@ Created on Sat Jan 12 10:32:17 2019
 @author: 靓靓
 """
 
-import sys
+
 import pygame
+
+
 from settings import Settings
+from ship import Ship
+import game_functions as gf
+
+
 def run_game():
     """初始化游戏并创建一个屏幕对象"""
     pygame.init()
@@ -15,17 +21,15 @@ def run_game():
     screen=pygame.display.set_mode((ai_setting.screen_width,ai_setting.screen_height))
     pygame.display.set_caption("Alien Invasion")
     bg_color=ai_setting.bg_color
+    ship = Ship(screen=screen,ai_setting=ai_setting)
     
     #开始游戏主循环
     while True:
-         #监视键盘和鼠标事件
-         for event in pygame.event.get():
-             if event.type==pygame.QUIT:
-                 pygame.quit()
-                 sys.exit()
-        #重新绘制屏幕
-         screen.fill(bg_color)
-        #刷新屏幕
-         pygame.display.flip()
+        gf.check_events(ship)
+        ship.update()
+        #更新屏幕
+        gf.update_screen(screen,ship,bg_color)
+       # print(ship.rect.centerx)
+        
 
 run_game()
