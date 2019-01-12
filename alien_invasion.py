@@ -7,12 +7,14 @@ Created on Sat Jan 12 10:32:17 2019
 
 import sys
 import pygame
+from settings import Settings
 def run_game():
     """初始化游戏并创建一个屏幕对象"""
     pygame.init()
-    screen=pygame.display.set_mode((1000,600))
+    ai_setting = Settings()
+    screen=pygame.display.set_mode((ai_setting.screen_width,ai_setting.screen_height))
     pygame.display.set_caption("Alien Invasion")
-    bg_color=(230,230,230)
+    bg_color=ai_setting.bg_color
     
     #开始游戏主循环
     while True:
